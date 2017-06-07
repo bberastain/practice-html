@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>'Messin With JS'</title>
+    <style>
+    .paint {
+        background: green;
+        width: 5px;
+        height: 5px;
+        position: absolute;
+    }
+    </style>
+</head>
+<body>
+    <h1>Messin With JS</h1>
+    <p>Today we're messing around with javascript.<br>
+        Let's try some basic functionality.<br></p>
+    <p> This first exercise will demonstrate the use of form input.<br>
+        What's your name?</p>
+    <input id='name'>
+    <button id='button'>Proceed</button>
+    <p id='post-button'></p>
+    <p>Now that we've made introductions why don't you draw something?</p>
+    <img src='http://carlabirnberg.com/wp-content/uploads/2015/01/rsz_1screen_shot_2015-01-10_at_64214_pm.png'
+    alt='blank page' id='board'><br>
+    <button id='clear'>Clear Board</button>
+
+<script>
+    //Button click prints greeting with name entered in box
+    var click = document.getElementById('button');
+    var buttonClick = function() {
+        var name = document.getElementById('name').value;
+        var greeting = 'Nice to meet you ' + name + '!';
+        document.getElementById('post-button').textContent = greeting
+    };
+    click.addEventListener('click', buttonClick);
+
+    //Allows user to draw in box
+    var i = document.getElementById('board');
+    var painting = function(e) {
+        var paint = document.createElement('div');
+        paint.className = 'paint';
+        document.body.appendChild(paint);
+        paint.style.top = e.clientY + 'px';
+        paint.style.left = e.clientX + 'px';
+        console.log(paint)
+    };
+    i.addEventListener('mousemove', painting);
+
+    //Button that clears board
+    var clear = document.getElementById('clear');
+    var clearBoard = function() {
+        var paintS = document.getElementsByClassName('paint');
+        while(paintS[0]) {
+            paintS[0].parentNode.removeChild(paintS[0]);
+        }
+    };
+    clear.addEventListener('click', clearBoard);
+
+
+</script>
+</body>
+</html>
